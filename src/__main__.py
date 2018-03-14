@@ -163,7 +163,6 @@ def comment_thread():
                 print("Error reading stream at " + time.strftime("%b %d, %Y - %I:%M:%S"))
 
         time.sleep(60)
-vv
 
 def save_karma():
     memepolice = reddit.redditor(bot_name)
