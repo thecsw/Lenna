@@ -163,7 +163,7 @@ def comment_thread():
                 print("Error reading stream at " + time.strftime("%b %d, %Y - %I:%M:%S"))
 
         time.sleep(60)
-
+vv
 
 def save_karma():
     memepolice = reddit.redditor(bot_name)
@@ -184,6 +184,6 @@ if __name__ == "__main__":
     Thread(name="Save Karma", target=save_karma).start()
     Thread(name="Submissions", target=submission_thread).start()
     Thread(name="Comments", target=comment_thread).start()
-    Thread(name="Replies", target=clever_reply).start()
+    Thread(name="Replies", target=clever_reply).start() # Cleverbot responses
 else:
     pass
