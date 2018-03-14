@@ -1,3 +1,6 @@
+# Ignore my emacs backup files
+.saves
+
 # Our checklists
 words.json
 checked.txt

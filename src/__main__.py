@@ -39,6 +39,8 @@ from threading import Thread
 # JSON Parsing
 import json
 
+from reply import clever_reply
+
 reddit = praw.Reddit(client_id=config.client_id,
                      client_secret=config.client_secret,
                      username=config.username,
@@ -47,6 +49,7 @@ reddit = praw.Reddit(client_id=config.client_id,
 
 subreddit = reddit.subreddit('pewdiepiesubmissions')
 # subreddit = reddit.subreddit('test')
+bot_name = 'MemePolice_bot'
 
 # Tesseract-ocr package can work only with jpeg, jpg, png, gif, bmp files. Reject all other urls
 pattern = re.compile(".(jpe?g|png|gifv?)(\?\S*)?")
@@ -163,7 +166,7 @@ def comment_thread():
 
 
 def save_karma():
-    memepolice = reddit.redditor("MemePolice_bot")
+    memepolice = reddit.redditor(bot_name)
     while True:
         for comment in memepolice.comments.new(limit=256):
             # It will parse 100 comments in 5-6 seconds
@@ -174,12 +177,13 @@ def save_karma():
         # We will wait an hour for downvotes to come
         time.sleep(3600)
 
-
+    
 if __name__ == "__main__":
     init_analyzation()
 
     Thread(name="Save Karma", target=save_karma).start()
     Thread(name="Submissions", target=submission_thread).start()
     Thread(name="Comments", target=comment_thread).start()
+    Thread(name="Replies", target=clever_reply).start()
 else:
     pass
